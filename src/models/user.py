@@ -13,9 +13,13 @@ class User:
 
 
     def set_email(self, email):
+        if self.email_validation(email):
+            self._email = email
+
+    @staticmethod
+    def email_validation(email):
         if '@' not in email:
             raise ValidationError('Неверный формат email')
-        self._email = email
 
 
     def __str__(self):
