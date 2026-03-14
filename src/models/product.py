@@ -41,3 +41,11 @@ class Product:
 
     def __eq__(self, other):
         return self.price == other.price and self.name == other.name
+
+
+    def check_stock(self):
+        pass
+
+
+    def update_stock(self):
+        pass
