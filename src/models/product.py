@@ -50,5 +50,11 @@ class Product:
     def update_stock(self):
         pass
 
+
     def calculate_shipping(self):
         pass
+
+
+    def get_name(self):
+        return self.name
+
