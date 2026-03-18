@@ -6,7 +6,7 @@ def get_user_order_history(conn, user_id):
     try:
         with conn.cursor() as cursor:
             cursor.execute(
-                """SELECT (orders.id, products.name, order_items.quantity, order_items.price)
+                """SELECT orders.id, products.name, order_items.quantity, order_items.price
                  FROM orders
                  INNER JOIN order_items ON order_items.order_id = orders.id
                  INNER JOIN products ON products.id = order_items.product_id
@@ -23,9 +23,10 @@ def get_order_statistics(conn):
     try:
         with conn.cursor() as cursor:
             cursor.execute(
-                """SELECT (user_id, COUNT(*), SUM(orders.total)) 
+                """SELECT user_id, users.name, COUNT(*), SUM(orders.total)
                 FROM orders
-                GROUP BY orders.user_id
+                LEFT JOIN users ON users.id = user_id
+                GROUP BY orders.user_id, users.name
                 """
             )
             result = cursor.fetchall()
